@@ -32,4 +32,29 @@ public class BabySitter {
 			return hoursWorked * AFTER_MIDNIGHT_RATE;
 		}
 	}
+	
+	public int hoursBeforeBedtime() {
+		if (endTime < BEDTIME) {
+			return endTime - startTime;
+		}
+		return BEDTIME - startTime;
+	}
+
+	public int hoursBetweenBedtimeAndMidnight() {
+		if (endTime < BEDTIME) {
+			return 0;
+		} else if (endTime < 24) {
+			return endTime - BEDTIME;
+		} else {
+			return 24 - BEDTIME;
+		}
+	}
+
+	public int hoursAfterMidnight() {
+		if (endTime <= 24) {
+			return 0;
+		} else {
+			return endTime - 24;
+		}
+	}
 }

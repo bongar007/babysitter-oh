@@ -58,4 +58,32 @@ public class BabySitterTest {
 		boolean notValid = sitter.isValidWorkHours(16);
 		Assert.assertEquals("Cannot start at 4 PM" , false, notValid);
 	}
+	
+	@Test
+	public void should6PmBeAValidStartTime() {
+		BabySitter sitter = new BabySitter(17, 28);
+		boolean valid = sitter.isValidWorkHours(17);
+		Assert.assertEquals("Ok to work between 5Pm and 4Am" , true, valid);
+	}
+	
+	@Test
+	public void hoursAfterMidnightMethodShouldReturnOne () {
+		BabySitter sitter = new BabySitter(24, 25);
+		int hour = sitter.hoursAfterMidnight();
+		Assert.assertEquals(1, hour);
+	}
+	
+	@Test
+	public void hoursBetweenBedtimeAndMidnightMethodShouldReturnOne () {
+		BabySitter sitter = new BabySitter(20, 21);
+		int hour = sitter.hoursBetweenBedtimeAndMidnight();
+		Assert.assertEquals(1, hour);
+	}
+	
+	@Test
+	public void hoursBeforeBedtimeShouldReturnOne () {
+		BabySitter sitter = new BabySitter(17, 18);
+		int hour = sitter.hoursBeforeBedtime();
+		Assert.assertEquals(1, hour);
+	}
 }
