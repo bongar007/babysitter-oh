@@ -20,4 +20,12 @@ public class BabySitterTest {
  		Assert.assertEquals("I am expected to get $24", 24, pay);
  		
  	}
+	
+	@Test
+ 	public void shouldPayForOneHourAfterBedtime() {
+ 		BabySitter sitter = new BabySitter(20, 21);
+ 		int pay = sitter.calculatePay();
+ 		Assert.assertEquals("I am expected to get $8", 8, pay);
+ 		
+ 	}
 }
