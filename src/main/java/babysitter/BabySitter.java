@@ -1,7 +1,7 @@
 package babysitter;
 
 public class BabySitter {
-	
+
 	private static final int BEFORE_BEDTIME_RATE = 12;
 	private static final int BETWEEN_BEDTIME_AND_MIDNIGHT_RATE = 8;
 	private static final int AFTER_MIDNIGHT_RATE = 16;
@@ -15,20 +15,27 @@ public class BabySitter {
 		this.endTime = endTime;
 		this.bedTime = bedTime;
 	}
-	
-	boolean isValidWorkHours(int num) {
-		if(startTime >= 17 && endTime <= 28) {
+
+	boolean isValidWorkHours(int startTime, int endTime) {
+		if (startTime >= 17 && endTime <= 28) {
 			return true;
 		}
 		return false;
 	}
+	
+	int convertAm(int am) {
+		if(am > 0 && am <= 4) {
+			am += 24; 
+		}
+		return am;
+	}
 
 	int calculatePay() {
-		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE + 
-				hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE +
-				hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
+		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE
+				+ hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
+				+ hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
 	}
-	
+
 	int hoursBeforeBedtime() {
 		if (endTime < bedTime) {
 			return endTime - startTime;

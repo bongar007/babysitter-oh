@@ -55,14 +55,14 @@ public class BabySitterTest {
 	@Test
 	public void should4PmBeNotaValidStartTime() {
 		BabySitter sitter = new BabySitter(16, 29, 20);
-		boolean notValid = sitter.isValidWorkHours(16);
+		boolean notValid = sitter.isValidWorkHours(16, 18);
 		Assert.assertEquals("Cannot start at 4 PM" , false, notValid);
 	}
 	
 	@Test
 	public void should6PmBeAValidStartTime() {
 		BabySitter sitter = new BabySitter(17, 28, 20);
-		boolean valid = sitter.isValidWorkHours(17);
+		boolean valid = sitter.isValidWorkHours(17, 28);
 		Assert.assertEquals("Ok to work between 5Pm and 4Am" , true, valid);
 	}
 	
@@ -85,5 +85,12 @@ public class BabySitterTest {
 		BabySitter sitter = new BabySitter(17, 18, 20);
 		int hour = sitter.hoursBeforeBedtime();
 		Assert.assertEquals(1, hour);
+	}
+	
+	@Test
+	public void amConverterShouldReturn26 () {
+		BabySitter sitter = new BabySitter(17, 18, 20);
+		int converted = sitter.convertAm(2);
+		Assert.assertEquals(26, converted);
 	}
 }
