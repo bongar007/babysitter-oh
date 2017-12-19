@@ -4,6 +4,8 @@ public class BabySitter {
 	
 	private static final int BEFORE_BEDTIME_RATE = 12;
 	private static final int AFTER_BEDTIME_RATE = 8;
+	private static final int BEDTIME = 20;
+
 	private int startTime;
 	private int endTime;
 
@@ -14,7 +16,7 @@ public class BabySitter {
 
 	int calculatePay() {
 		int hoursWorked = endTime - startTime;
-		if(startTime >= 20 && endTime <= 24) {
+		if(startTime >= BEDTIME && endTime <= 24) {
 			return AFTER_BEDTIME_RATE * hoursWorked;
 		} else {
 		return hoursWorked * BEFORE_BEDTIME_RATE;
