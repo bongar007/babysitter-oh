@@ -5,14 +5,15 @@ public class BabySitter {
 	private static final int BEFORE_BEDTIME_RATE = 12;
 	private static final int BETWEEN_BEDTIME_AND_MIDNIGHT_RATE = 8;
 	private static final int AFTER_MIDNIGHT_RATE = 16;
-	private static final int BEDTIME = 20;
 
 	private int startTime;
 	private int endTime;
+	private int bedTime;
 
-	public BabySitter(int startTime, int endTime) {
+	public BabySitter(int startTime, int endTime, int bedTime) {
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.bedTime = bedTime;
 	}
 	
 	boolean isValidWorkHours(int num) {
@@ -23,35 +24,30 @@ public class BabySitter {
 	}
 
 	int calculatePay() {
-		int hoursWorked = endTime - startTime;
-		if(startTime >= 17 && endTime <= BEDTIME) {
-			return BEFORE_BEDTIME_RATE * hoursWorked;
-		} else if(startTime >= BEDTIME && endTime <= 24) {
-			return hoursWorked * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE;
-		} else {
-			return hoursWorked * AFTER_MIDNIGHT_RATE;
-		}
+		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE + 
+				hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE +
+				hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
 	}
 	
-	public int hoursBeforeBedtime() {
-		if (endTime < BEDTIME) {
+	int hoursBeforeBedtime() {
+		if (endTime < bedTime) {
 			return endTime - startTime;
 		}
-		return BEDTIME - startTime;
+		return bedTime - startTime;
 	}
 
-	public int hoursBetweenBedtimeAndMidnight() {
-		if (endTime < BEDTIME) {
+	int hoursBetweenBedtimeAndMidnight() {
+		if (endTime < bedTime) {
 			return 0;
 		} else if (endTime < 24) {
-			return endTime - BEDTIME;
+			return endTime - bedTime;
 		} else {
-			return 24 - BEDTIME;
+			return 24 - bedTime;
 		}
 	}
 
-	public int hoursAfterMidnight() {
-		if (endTime <= 24) {
+	int hoursAfterMidnight() {
+		if (endTime < 24) {
 			return 0;
 		} else {
 			return endTime - 24;
