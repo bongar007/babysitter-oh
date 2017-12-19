@@ -51,4 +51,11 @@ public class BabySitterTest {
  		int pay = sitter.calculatePay();
  		Assert.assertEquals("I am expected to get $32", 32, pay);
 	}
+	
+	@Test
+	public void should4PmBeNotaValidStartTime() {
+		BabySitter sitter = new BabySitter(16, 29);
+		boolean notValid = sitter.isValidWorkHours(16);
+		Assert.assertEquals("Cannot start at 4 PM" , false, notValid);
+	}
 }

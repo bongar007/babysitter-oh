@@ -14,6 +14,13 @@ public class BabySitter {
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
+	
+	boolean isValidWorkHours(int num) {
+		if(startTime >= 17 && endTime <= 28) {
+			return true;
+		}
+		return false;
+	}
 
 	int calculatePay() {
 		int hoursWorked = endTime - startTime;
