@@ -1,14 +1,16 @@
 package babysitter;
 
 public class BabySitter {
+	
+	private static final int BEFORE_BEDTIME_RATE = 12;
 
 	public BabySitter(int i, int j) {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int calculatePay() {
+	int calculatePay() {
 		// TODO Auto-generated method stub
-		return 12;
+		return BEFORE_BEDTIME_RATE;
 	}
 	
 	
