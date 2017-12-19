@@ -35,6 +35,7 @@ public class BabySitter {
 				+ hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
 				+ hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
 	}
+	
 
 	int hoursBeforeBedtime() {
 		if (endTime < bedTime) {
