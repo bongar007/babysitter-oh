@@ -3,14 +3,17 @@ package babysitter;
 public class BabySitter {
 	
 	private static final int BEFORE_BEDTIME_RATE = 12;
+	private int startTime;
+	private int endTime;
 
-	public BabySitter(int i, int j) {
-		// TODO Auto-generated constructor stub
+	public BabySitter(int startTime, int endTime) {
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
 
 	int calculatePay() {
-		// TODO Auto-generated method stub
-		return BEFORE_BEDTIME_RATE;
+		int hoursWorked = endTime - startTime;
+		return hoursWorked * BEFORE_BEDTIME_RATE;
 	}
 	
 	
