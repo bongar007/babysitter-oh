@@ -77,7 +77,7 @@ public class BabySitter {
 		System.out.println("Please enter the end time (In 24 hour format please):");
 		int end = sc.nextInt();
 		System.out.println();
-		System.out.println("Please add the desired bedtime(IN 24 hour format please):");
+		System.out.println("Please add the desired bedtime(In 24 hour format please):");
 		int bedtime = sc.nextInt();
 		System.out.println("Thank you!");
 		
@@ -86,7 +86,7 @@ public class BabySitter {
 		if(pay.calculatePay() == 0) {
 			System.out.println("Sorry, can't work those hours. Business hours from 5PM - 4AM");
 		} else {
-			System.out.println("Your payment for the night is: " + pay.calculatePay());
+			System.out.println("Your payment for the night is: " + "$" + pay.calculatePay());
 		}
 		
 	}
