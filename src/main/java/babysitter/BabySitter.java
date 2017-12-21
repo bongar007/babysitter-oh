@@ -1,5 +1,7 @@
 package babysitter;
 
+import java.util.Scanner;
+
 public class BabySitter {
 
 	private static final int BEFORE_BEDTIME_RATE = 12;
@@ -30,10 +32,14 @@ public class BabySitter {
 		return am;
 	}
 
+	
 	int calculatePay() {
+		if(isValidWorkHours(startTime, endTime)) {
 		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE
 				+ hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
 				+ hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
+		}
+		return 0;
 	}
 	
 
@@ -60,5 +66,28 @@ public class BabySitter {
 		} else {
 			return endTime - 24;
 		}
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+	
+		System.out.println("Please enter the start time (In 24 hour format please):");
+		int start = sc.nextInt();
+		System.out.println();
+		System.out.println("Please enter the end time (In 24 hour format please):");
+		int end = sc.nextInt();
+		System.out.println();
+		System.out.println("Please add the desired bedtime(IN 24 hour format please):");
+		int bedtime = sc.nextInt();
+		System.out.println("Thank you!");
+		
+		BabySitter pay = new BabySitter(start, end, bedtime);
+		
+		if(pay.calculatePay() == 0) {
+			System.out.println("Sorry, can't work those hours. Business hours from 5PM - 4AM");
+		} else {
+			System.out.println("Your payment for the night is: " + pay.calculatePay());
+		}
+		
 	}
 }
