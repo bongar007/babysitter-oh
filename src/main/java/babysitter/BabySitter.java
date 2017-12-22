@@ -70,6 +70,15 @@ public class BabySitter {
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Hello, I am your baby sitter for tonight!");
+		System.out.println();
+		System.out.println("My hours are between 5PM and 4AM");
+		System.out.println();
+		System.out.println("From 5Pm until your desired bedtime, I charge $12/hr");
+		System.out.println("From bedtime until 12Am, it's $8/hr");
+		System.out.println("And midnight until 4Am, it's $16/hr");
+		System.out.println();
 	
 		System.out.println("Please enter the start time (In 24 hour format please):");
 		int start = sc.nextInt();
