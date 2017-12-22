@@ -13,9 +13,9 @@ public class BabySitter {
 	private int bedTime;
 
 	public BabySitter(int startTime, int endTime, int bedTime) {
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.bedTime = bedTime;
+		this.startTime = convertAm(startTime);
+		this.endTime = convertAm(endTime);
+		this.bedTime = convertAm(bedTime);
 	}
 
 	boolean isValidWorkHours(int startTime, int endTime) {
