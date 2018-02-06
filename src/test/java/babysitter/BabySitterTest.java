@@ -74,6 +74,13 @@ public class BabySitterTest {
 	}
 	
 	@Test
+	public void hoursBetween4PmAnd5AmShouldBeInvalid() {
+		BabySitter sitter = new BabySitter(16, 29, 20);
+		boolean notValid = sitter.isValidWorkHours(16, 29);
+		Assert.assertEquals("Hours outside of business hours are not valid", false, notValid);		
+	}
+	
+	@Test
 	public void hoursAfterMidnightMethodShouldReturnOne () {
 		BabySitter sitter = new BabySitter(24, 25, 20);
 		int hour = sitter.hoursAfterMidnight();
