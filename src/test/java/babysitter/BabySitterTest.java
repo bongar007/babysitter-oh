@@ -38,7 +38,7 @@ public class BabySitterTest {
  	}
 	
 	@Test
- 	public void shouldReturnZero() {
+ 	public void shouldCalculateZeroHours() {
  		BabySitter sitter = new BabySitter(17, 18, 19);
  		int hour = sitter.hoursBetweenBedtimeAndMidnight();
  		Assert.assertEquals("expecting zero hour", 0, hour);

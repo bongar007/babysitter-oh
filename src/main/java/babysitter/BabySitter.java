@@ -49,7 +49,7 @@ public class BabySitter {
 	}
 
 	int hoursBetweenBedtimeAndMidnight() {
-		if (startTime >= bedTime && endTime <= 24) {
+		if (startTime <= bedTime && endTime > bedTime && endTime <= 24) {
 				return endTime - bedTime;
 		} else
 			return 0;
