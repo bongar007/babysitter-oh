@@ -40,12 +40,11 @@ public class BabySitter {
 	}
 
 	int hoursBeforeBedtime() {
-		if (startTime < 17) {
-			return 0;
-		} else if (endTime < bedTime) {
+		if(startTime >= 17 && endTime <= bedTime) {
 			return endTime - startTime;
+		} else {
+			return 0; 
 		}
-		return bedTime - startTime;
 	}
 
 	int hoursBetweenBedtimeAndMidnight() {

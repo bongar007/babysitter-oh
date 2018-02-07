@@ -30,6 +30,14 @@ public class BabySitterTest {
  	}
 	
 	@Test
+ 	public void shouldCalculateTwoHoursBeforeBedTime() {
+ 		BabySitter sitter = new BabySitter(17, 19, 20);
+ 		int hours = sitter.hoursBeforeBedtime();
+ 		Assert.assertEquals("I am expected to get 2 hours", 2, hours);
+ 		
+ 	}
+	
+	@Test
  	public void shouldCalculateOneHour() {
  		BabySitter sitter = new BabySitter(18, 21, 20);
  		int hour = sitter.hoursBetweenBedtimeAndMidnight();
@@ -95,7 +103,7 @@ public class BabySitterTest {
 	
 	@Test
  	public void shouldPayFor11HoursOfWork() {
- 		BabySitter sitter = new BabySitter(17, 28, 20);
+ 		BabySitter sitter = new BabySitter(17, 4, 20);
  		int pay = sitter.calculatePay();
  		Assert.assertEquals("I am expected to get $132", 132, pay);
 	}
