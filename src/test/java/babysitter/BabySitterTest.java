@@ -14,10 +14,26 @@ public class BabySitterTest {
 	 	}
 	
 	@Test
+ 	public void shouldReturnZeroIfStartimeIsBefore5Pm() {
+ 		BabySitter sitter = new BabySitter(14, 18, 20);
+ 		int pay = sitter.calculatePay();
+ 		Assert.assertEquals("Cannot start before 5Pm", 0, pay);
+ 		
+ 	}
+	
+	@Test
  	public void shouldPayForTwoHoursBeforeBedtime() {
  		BabySitter sitter = new BabySitter(17, 19, 20);
  		int pay = sitter.calculatePay();
  		Assert.assertEquals("I am expected to get $24", 24, pay);
+ 		
+ 	}
+	
+	@Test
+ 	public void shouldPayOneHourIfStartimeIsBeforeBedtimeButEndsOneHourAfterBedtime() {
+ 		BabySitter sitter = new BabySitter(18, 21, 20);
+ 		int hour = sitter.hoursBetweenBedtimeAndMidnight();
+ 		Assert.assertEquals("expecting one hour", 1, hour);
  		
  	}
 	
@@ -34,6 +50,23 @@ public class BabySitterTest {
  		BabySitter sitter = new BabySitter(20, 22, 20);
  		int pay = sitter.calculatePay();
  		Assert.assertEquals("I am expected to get $16", 16, pay);
+ 		
+ 	}
+	
+	
+	@Test
+ 	public void shoundCalculateTwoHours() {
+ 		BabySitter sitter = new BabySitter(24, 26, 20);
+ 		int hours = sitter.hoursAfterMidnight();
+ 		Assert.assertEquals("I am expected to get 2 hours", 2, hours);
+ 		
+ 	}
+	
+	@Test
+ 	public void shoundCalculateZeroHours() {
+ 		BabySitter sitter = new BabySitter(20, 23, 21);
+ 		int hours = sitter.hoursAfterMidnight();
+ 		Assert.assertEquals("I am expected to get 0 hours", 0, hours);
  		
  	}
 	
