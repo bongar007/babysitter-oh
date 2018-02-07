@@ -26,7 +26,8 @@ public class BabySitter {
 	}
 
 	int convertAm(int am) {
-		if (am > 0 && am <= 4) {
+		if (am <= 0 || am > 4) {
+		} else {
 			am += 24;
 		}
 		return am;
@@ -48,17 +49,14 @@ public class BabySitter {
 	}
 
 	int hoursBetweenBedtimeAndMidnight() {
-		if (startTime < bedTime || endTime < bedTime) {
+		if (startTime >= bedTime && endTime <= 24) {
+				return endTime - bedTime;
+		} else
 			return 0;
-		} else if (endTime < 24 && endTime > bedTime) {
-			return endTime - bedTime;
-		} else {
-			return 24 - bedTime;
-		}
 	}
 
 	int hoursAfterMidnight() {
-		if (startTime < 24 || endTime < 24) {
+		if (startTime < 24 && endTime < 24) {
 			return 0;
 		} else {
 			return endTime - 24;

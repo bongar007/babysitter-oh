@@ -30,10 +30,18 @@ public class BabySitterTest {
  	}
 	
 	@Test
- 	public void shouldPayOneHourIfStartimeIsBeforeBedtimeButEndsOneHourAfterBedtime() {
+ 	public void shouldCalculateOneHour() {
  		BabySitter sitter = new BabySitter(18, 21, 20);
  		int hour = sitter.hoursBetweenBedtimeAndMidnight();
  		Assert.assertEquals("expecting one hour", 1, hour);
+ 		
+ 	}
+	
+	@Test
+ 	public void shouldReturnZero() {
+ 		BabySitter sitter = new BabySitter(17, 18, 19);
+ 		int hour = sitter.hoursBetweenBedtimeAndMidnight();
+ 		Assert.assertEquals("expecting zero hour", 0, hour);
  		
  	}
 	
@@ -55,7 +63,7 @@ public class BabySitterTest {
 	
 	
 	@Test
- 	public void shoundCalculateTwoHours() {
+ 	public void shouldCalculateTwoHoursAfterMidnight() {
  		BabySitter sitter = new BabySitter(24, 26, 20);
  		int hours = sitter.hoursAfterMidnight();
  		Assert.assertEquals("I am expected to get 2 hours", 2, hours);
@@ -63,7 +71,7 @@ public class BabySitterTest {
  	}
 	
 	@Test
- 	public void shoundCalculateZeroHours() {
+ 	public void shoundCalculateZeroHoursAfterMidnight() {
  		BabySitter sitter = new BabySitter(20, 23, 21);
  		int hours = sitter.hoursAfterMidnight();
  		Assert.assertEquals("I am expected to get 0 hours", 0, hours);
@@ -72,8 +80,8 @@ public class BabySitterTest {
 	
 	@Test
  	public void shouldPayForOneHourAfterMidnight() {
- 		BabySitter sitter = new BabySitter(25, 26, 20);
- 		int pay = sitter.calculatePay();
+ 		BabySitter sitter = new BabySitter(25, 25, 20);
+ 		int pay = sitter.hoursAfterMidnight() * 16;
  		Assert.assertEquals("I am expected to get $16", 16, pay);
  		
  	}
@@ -139,5 +147,19 @@ public class BabySitterTest {
 		BabySitter sitter = new BabySitter(17, 18, 20);
 		int converted = sitter.convertAm(2);
 		Assert.assertEquals(26, converted);
+	}
+	
+	@Test
+	public void amConverterShouldReturn5 () {
+		BabySitter sitter = new BabySitter(17, 18, 20);
+		int converted = sitter.convertAm(5);
+		Assert.assertEquals(5, converted);
+	}
+	
+	@Test
+	public void amConverterShouldReturn24 () {
+		BabySitter sitter = new BabySitter(17, 24, 20);
+		int converted = sitter.convertAm(24);
+		Assert.assertEquals(24, converted);
 	}
 }
