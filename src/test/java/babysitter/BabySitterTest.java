@@ -80,7 +80,7 @@ public class BabySitterTest {
 	
 	@Test
  	public void shouldPayForOneHourAfterMidnight() {
- 		BabySitter sitter = new BabySitter(25, 25, 20);
+ 		BabySitter sitter = new BabySitter(1, 2, 20);
  		int pay = sitter.hoursAfterMidnight() * 16;
  		Assert.assertEquals("I am expected to get $16", 16, pay);
  		
@@ -88,8 +88,8 @@ public class BabySitterTest {
 	
 	@Test
  	public void shouldPayForTwoHoursAfterMidnight() {
- 		BabySitter sitter = new BabySitter(26, 28, 20);
- 		int pay = sitter.calculatePay();
+ 		BabySitter sitter = new BabySitter(1, 3, 20);
+ 		int pay = sitter.hoursAfterMidnight() * 16;
  		Assert.assertEquals("I am expected to get $32", 32, pay);
 	}
 	

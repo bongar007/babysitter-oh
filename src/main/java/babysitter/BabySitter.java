@@ -56,11 +56,15 @@ public class BabySitter {
 	}
 
 	int hoursAfterMidnight() {
-		if (startTime < 24 && endTime < 24) {
-			return 0;
-		} else {
+		if (startTime > 24 && endTime > 24) {
+			return endTime - startTime;
+		} else if(endTime > 24) {
 			return endTime - 24;
+		} else {
+			return 0;
 		}
+		
+		
 	}
 
 	public static void main(String[] args) {
