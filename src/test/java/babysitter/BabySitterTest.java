@@ -102,11 +102,44 @@ public class BabySitterTest {
 	}
 	
 	@Test
+	public void hoursAfterMidnightMethodShouldReturnOne () {
+		BabySitter sitter = new BabySitter(24, 25, 20);
+		int hour = sitter.hoursAfterMidnight();
+		Assert.assertEquals(1, hour);
+	}
+	
+	@Test
+	public void hoursBetweenBedtimeAndMidnightMethodShouldReturnOne () {
+		BabySitter sitter = new BabySitter(20, 21, 20);
+		int hour = sitter.hoursBetweenBedtimeAndMidnight();
+		Assert.assertEquals(1, hour);
+	}
+	
+	@Test
+	public void hoursBeforeBedtimeShouldReturnOne () {
+		BabySitter sitter = new BabySitter(17, 18, 20);
+		int hour = sitter.hoursBeforeBedtime();
+		Assert.assertEquals(1, hour);
+	}
+	
+	
+	// Testing cross calculations between methods ////////////////////////
+	
+	@Test
  	public void shouldPayFor11HoursOfWork() {
  		BabySitter sitter = new BabySitter(17, 4, 20);
  		int pay = sitter.calculatePay();
  		Assert.assertEquals("I am expected to get $132", 132, pay);
 	}
+	
+	@Test
+ 	public void shouldAddOneHourBeforeBedtimeAndAfter() {
+ 		BabySitter sitter = new BabySitter(17, 19, 18);
+ 		int pay = sitter.calculatePay();
+ 		Assert.assertEquals("I am expected to get $20", 20, pay);
+	}
+	
+	//////////////////////////////////////////////////////////////////
 	
 	@Test
 	public void should4PmBeNotaValidStartTime() {
@@ -129,26 +162,7 @@ public class BabySitterTest {
 		Assert.assertEquals("Hours outside of business hours are not valid", false, notValid);		
 	}
 	
-	@Test
-	public void hoursAfterMidnightMethodShouldReturnOne () {
-		BabySitter sitter = new BabySitter(24, 25, 20);
-		int hour = sitter.hoursAfterMidnight();
-		Assert.assertEquals(1, hour);
-	}
-	
-	@Test
-	public void hoursBetweenBedtimeAndMidnightMethodShouldReturnOne () {
-		BabySitter sitter = new BabySitter(20, 21, 20);
-		int hour = sitter.hoursBetweenBedtimeAndMidnight();
-		Assert.assertEquals(1, hour);
-	}
-	
-	@Test
-	public void hoursBeforeBedtimeShouldReturnOne () {
-		BabySitter sitter = new BabySitter(17, 18, 20);
-		int hour = sitter.hoursBeforeBedtime();
-		Assert.assertEquals(1, hour);
-	}
+	/////////////// Converter tests /////////////////////
 	
 	@Test
 	public void amConverterShouldReturn26 () {
