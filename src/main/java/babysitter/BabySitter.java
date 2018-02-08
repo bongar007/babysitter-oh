@@ -19,15 +19,29 @@ public class BabySitter {
 	}
 
 	boolean isValidWorkHours(int startTime, int endTime) {
-		if ((startTime >= 17 && startTime <= 27) && (endTime <= 28 && endTime >= 18)) {
+		if ((startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17)) {
 			return true;
 		}
 		return false;
 	}
 
+	boolean invalidUserEntry(int startTime, int endTime, int bedTime) {
+		boolean invalidTracker = false;
+		int[] invalids = new int[] { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+		try (Scanner sc = new Scanner(System.in)) {
+			for (int i = 0; i < invalids.length; i++) {
+				if (invalids[i] == sc.nextInt()) {
+					invalidTracker = true;
+				}
+				invalidTracker = false;
+			}
+		}
+		return invalidTracker;
+
+	}
+
 	int convertAm(int am) {
-		if (am <= 0 || am > 4) {
-		} else {
+		if (am > 0 && am <= 4) {
 			am += 24;
 		}
 		return am;
@@ -40,16 +54,16 @@ public class BabySitter {
 	}
 
 	int hoursBeforeBedtime() {
-		if(startTime >= 17 && endTime <= bedTime) {
+		if (startTime >= 17 && endTime <= bedTime) {
 			return endTime - startTime;
 		} else {
-			return 0; 
+			return 0;
 		}
 	}
 
 	int hoursBetweenBedtimeAndMidnight() {
 		if (startTime <= bedTime && endTime > bedTime && endTime <= 24) {
-				return endTime - bedTime;
+			return endTime - bedTime;
 		} else
 			return 0;
 	}
@@ -57,13 +71,12 @@ public class BabySitter {
 	int hoursAfterMidnight() {
 		if (startTime > 24 && endTime > 24) {
 			return endTime - startTime;
-		} else if(endTime > 24) {
+		} else if (endTime > 24) {
 			return endTime - 24;
 		} else {
 			return 0;
 		}
-		
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -87,13 +100,22 @@ public class BabySitter {
 			System.out.println("Please add the desired bedtime(In 24 hour format please):");
 			int bedtime = sc.nextInt();
 			System.out.println("Thank you!");
+			System.out.println();
 
 			BabySitter pay = new BabySitter(start, end, bedtime);
 
-			if (pay.isValidWorkHours(start, end) == true) {
+			if ((pay.isValidWorkHours(start, end) == true) && pay.invalidUserEntry(start, end, bedtime)) {
 				System.out.println("Your payment for the night is: " + "$" + pay.calculatePay());
 			} else {
-				System.out.println("Sorry, can't work those hours. Business hours from 5PM - 4AM");
+				System.out.println(
+						"Sorry, either you have entered invalid format or I can't work those hours. Business hours from 5PM - 4AM");
+				System.out.println();
+				System.out.println(
+						"*********************************************************************************************");
+				System.out.println();
+				System.out.println("Try again:");
+				System.out.println();
+				main(args);
 			}
 		}
 	}
