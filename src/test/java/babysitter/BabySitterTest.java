@@ -139,6 +139,13 @@ public class BabySitterTest {
  		Assert.assertEquals("I am expected to get $20", 20, pay);
 	}
 	
+	@Test
+ 	public void shouldReturnTwoHoursOfPayBetween11And1() {
+ 		BabySitter sitter = new BabySitter(23, 1, 24);
+ 		int pay = sitter.calculatePay();
+ 		Assert.assertEquals("I am expected to get $28", 28, pay);
+	}
+	
 	//////////////////////////////////////////////////////////////////
 	
 	@Test
