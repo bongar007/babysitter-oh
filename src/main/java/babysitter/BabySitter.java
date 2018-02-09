@@ -19,7 +19,7 @@ public class BabySitter {
 	}
 
 	int convertAm(int am) {
-		return am >= 4 ? am + 24 : am;
+		return (am <= 4) ? am + 24 : am;
 	}
 
 	boolean isValidWorkHours(int starTime, int endTime) {
