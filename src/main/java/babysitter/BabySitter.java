@@ -23,11 +23,7 @@ public class BabySitter {
 	}
 
 	boolean isValidWorkHours(int starTime, int endTime) {
-		if ((startTime >= 17 && startTime < 28)
-				&& (endTime <= 28 && endTime > 17)) {
-			return true;
-		}
-		return false;
+		return((startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17)); 
 	}
 
 	// boolean invalidUserEntry(int startTime, int endTime, int bedTime) {
