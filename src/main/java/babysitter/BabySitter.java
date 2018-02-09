@@ -19,10 +19,7 @@ public class BabySitter {
 	}
 
 	boolean isValidWorkHours(int startTime, int endTime) {
-		if ((startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17)) {
-			return true;
-		}
-		return false;
+		return (startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17);
 	}
 
 	boolean invalidUserEntry(int startTime, int endTime, int bedTime) {
@@ -33,7 +30,6 @@ public class BabySitter {
 				if (invalids[i] == sc.nextInt()) {
 					invalidTracker = true;
 				}
-				invalidTracker = false;
 			}
 		}
 		return invalidTracker;
@@ -41,42 +37,27 @@ public class BabySitter {
 	}
 
 	int convertAm(int am) {
-		if (am > 0 && am <= 4) {
-			am += 24;
-		}
-		return am;
+		return (am <= 4) ? am + 24 : am;
 	}
 
 	int calculatePay() {
-		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE
-				+ hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
-				+ hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
-	}
-
-	int hoursBeforeBedtime() {
-		if (startTime >= 17 && endTime <= bedTime) {
-			return endTime - startTime;
-		} else {
+		int result = 0;
+		
+		if (!isValidWorkHours(startTime, endTime)) {
 			return 0;
 		}
-	}
-
-	int hoursBetweenBedtimeAndMidnight() {
-		if (startTime <= bedTime && endTime > bedTime && endTime <= 24) {
-			return endTime - bedTime;
-		} else
-			return 0;
-	}
-
-	int hoursAfterMidnight() {
-		if (startTime > 24 && endTime > 24) {
-			return endTime - startTime;
-		} else if (endTime > 24) {
-			return endTime - 24;
-		} else {
-			return 0;
+		
+		for (int i = startTime; i < endTime; i++) {
+			if (i < bedTime && i < 24) {
+				result += BEFORE_BEDTIME_RATE;
+			} else if (i >= bedTime && i < 24) {
+				result += BETWEEN_BEDTIME_AND_MIDNIGHT_RATE;
+			} else {
+				result += AFTER_MIDNIGHT_RATE;
+			}
 		}
-
+		
+		return result;
 	}
 
 	public static void main(String[] args) {
