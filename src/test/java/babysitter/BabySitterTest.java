@@ -70,26 +70,26 @@ public class BabySitterTest {
  		Assert.assertEquals("I am expected to get $28", 28, pay);
 	}
 	
-	//////////////////////////////////////////////////////////////////
+	////////////////////valid work hours check//////////////////////////////////////////////
 	
 	@Test
 	public void should4PmBeNotaValidStartTime() {
 		BabySitter sitter = new BabySitter(16, 29, 20);
-		boolean notValid = sitter.isValidWorkHours(16, 18);
+		boolean notValid = sitter.isValidWorkHours();
 		Assert.assertEquals("Cannot start at 4 PM" , false, notValid);
 	}
 	
 	@Test
 	public void should6PmBeAValidStartTime() {
 		BabySitter sitter = new BabySitter(17, 28, 20);
-		boolean valid = sitter.isValidWorkHours(17, 28);
+		boolean valid = sitter.isValidWorkHours();
 		Assert.assertEquals("Ok to work between 5Pm and 4Am" , true, valid);
 	}
 	
 	@Test
 	public void hoursBetween4PmAnd5AmShouldBeInvalid() {
 		BabySitter sitter = new BabySitter(16, 29, 20);
-		boolean notValid = sitter.isValidWorkHours(16, 29);
+		boolean notValid = sitter.isValidWorkHours();
 		Assert.assertEquals("Hours outside of business hours are not valid", false, notValid);		
 	}
 	
@@ -118,10 +118,26 @@ public class BabySitterTest {
 	
 	////////////// invalid User Entry check //////////
 	
-//	@Test
-//	public void invalidUserEntryMethodShouldReturnTrue () {
-//		BabySitter sitter = new BabySitter(5, 11, 8);
-//		boolean invalid = sitter.invalidUserEntry(5, 11, 8);
-//		Assert.assertEquals(true, invalid);
-//	}
+	@Test
+	public void isValidUserEntryMethodSHouldReturnFalse () {
+		BabySitter sitter = new BabySitter(5, 11, 8);
+		boolean invalid = sitter.isValidUserEntry();
+		Assert.assertEquals(false, invalid);
+	}
+	
+	@Test
+	public void isValidUserEntryMethodSHouldReturnTrue () {
+		BabySitter sitter = new BabySitter(17, 23, 20);
+		boolean valid = sitter.isValidUserEntry();
+		Assert.assertEquals(true, valid);
+	}
+	
+	@Test
+	public void isValidUserEntryMethodSHouldReturnFalseIfMixMatchedValuesAreBeingEntered () {
+		BabySitter sitter = new BabySitter(17, 11, 20);
+		boolean invalid = sitter.isValidUserEntry();
+		Assert.assertEquals(false, invalid);
+	}
+	
+	
 }

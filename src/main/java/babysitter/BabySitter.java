@@ -1,7 +1,6 @@
 package babysitter;
 
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class BabySitter {
 
@@ -28,14 +27,7 @@ public class BabySitter {
 	}
 
 	boolean isValidUserEntry() {
-		final int[] invalids = IntStream.rangeClosed(5, 16).toArray(); 
-		
-		boolean startBeforeEnd = startTime < endTime;
-		boolean startDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == startTime);
-		boolean endDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == endTime);
-		boolean bedTimeDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == bedTime);
-		
-		return startBeforeEnd && startDuringValidHours && endDuringValidHours && bedTimeDuringValidHours;
+		  return startTime < endTime && startTime >= 17 && endTime >= 17 && bedTime >= 17;
 	}
 
 	public int calculatePay() {
