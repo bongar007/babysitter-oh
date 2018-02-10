@@ -29,29 +29,6 @@ public class BabySitterTest {
  		
  	}
 	
-	@Test
- 	public void shouldCalculateTwoHoursBeforeBedTime() {
- 		BabySitter sitter = new BabySitter(17, 19, 20);
- 		int hours = sitter.hoursBeforeBedtime();
- 		Assert.assertEquals("I am expected to get 2 hours", 2, hours);
- 		
- 	}
-	
-	@Test
- 	public void shouldCalculateOneHour() {
- 		BabySitter sitter = new BabySitter(18, 21, 20);
- 		int hour = sitter.hoursBetweenBedtimeAndMidnight();
- 		Assert.assertEquals("expecting one hour", 1, hour);
- 		
- 	}
-	
-	@Test
- 	public void shouldCalculateZeroHours() {
- 		BabySitter sitter = new BabySitter(17, 18, 19);
- 		int hour = sitter.hoursBetweenBedtimeAndMidnight();
- 		Assert.assertEquals("expecting zero hour", 0, hour);
- 		
- 	}
 	
 	@Test
  	public void shouldPayForOneHourAfterBedtime() {
@@ -68,59 +45,6 @@ public class BabySitterTest {
  		Assert.assertEquals("I am expected to get $16", 16, pay);
  		
  	}
-	
-	
-	@Test
- 	public void shouldCalculateTwoHoursAfterMidnight() {
- 		BabySitter sitter = new BabySitter(24, 26, 20);
- 		int hours = sitter.hoursAfterMidnight();
- 		Assert.assertEquals("I am expected to get 2 hours", 2, hours);
- 		
- 	}
-	
-	@Test
- 	public void shoundCalculateZeroHoursAfterMidnight() {
- 		BabySitter sitter = new BabySitter(20, 23, 21);
- 		int hours = sitter.hoursAfterMidnight();
- 		Assert.assertEquals("I am expected to get 0 hours", 0, hours);
- 		
- 	}
-	
-	@Test
- 	public void shouldPayForOneHourAfterMidnight() {
- 		BabySitter sitter = new BabySitter(1, 2, 20);
- 		int pay = sitter.hoursAfterMidnight() * 16;
- 		Assert.assertEquals("I am expected to get $16", 16, pay);
- 		
- 	}
-	
-	@Test
- 	public void shouldPayForTwoHoursAfterMidnight() {
- 		BabySitter sitter = new BabySitter(1, 3, 20);
- 		int pay = sitter.hoursAfterMidnight() * 16;
- 		Assert.assertEquals("I am expected to get $32", 32, pay);
-	}
-	
-	@Test
-	public void hoursAfterMidnightMethodShouldReturnOne () {
-		BabySitter sitter = new BabySitter(24, 25, 20);
-		int hour = sitter.hoursAfterMidnight();
-		Assert.assertEquals(1, hour);
-	}
-	
-	@Test
-	public void hoursBetweenBedtimeAndMidnightMethodShouldReturnOne () {
-		BabySitter sitter = new BabySitter(20, 21, 20);
-		int hour = sitter.hoursBetweenBedtimeAndMidnight();
-		Assert.assertEquals(1, hour);
-	}
-	
-	@Test
-	public void hoursBeforeBedtimeShouldReturnOne () {
-		BabySitter sitter = new BabySitter(17, 18, 20);
-		int hour = sitter.hoursBeforeBedtime();
-		Assert.assertEquals(1, hour);
-	}
 	
 	
 	// Testing cross calculations between methods ////////////////////////
@@ -191,4 +115,13 @@ public class BabySitterTest {
 		int converted = sitter.convertAm(24);
 		Assert.assertEquals(24, converted);
 	}
+	
+	////////////// invalid User Entry check //////////
+	
+//	@Test
+//	public void invalidUserEntryMethodShouldReturnTrue () {
+//		BabySitter sitter = new BabySitter(5, 11, 8);
+//		boolean invalid = sitter.invalidUserEntry(5, 11, 8);
+//		Assert.assertEquals(true, invalid);
+//	}
 }

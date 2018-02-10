@@ -1,6 +1,7 @@
 package babysitter;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class BabySitter {
 
@@ -22,67 +23,36 @@ public class BabySitter {
 		return (am <= 4) ? am + 24 : am;
 	}
 
-	boolean isValidWorkHours(int starTime, int endTime) {
+	boolean isValidWorkHours() {
 		return ((startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17));
 	}
 
-	boolean invalidUserEntry(int startTime, int endTime, int bedTime) {
-		boolean invalidTracker = false;
-		int[] invalids = new int[] { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		try (Scanner sc = new Scanner(System.in)) {
-			for (int i = 0; i < invalids.length; i++) {
-				if (invalids[i] == sc.nextInt()) {
-					invalidTracker = true;
-				}
-			}
-		}
-		return invalidTracker;
-	}
-
-	int hoursBeforeBedtime() {
-		if (startTime >= 17 && endTime <= bedTime) {
-			return endTime - startTime;
-		} else {
-			return 0;
-		}
-	}
-
-	int hoursBetweenBedtimeAndMidnight() {
-		if (startTime <= bedTime && endTime > bedTime && endTime <= 24) {
-			return endTime - bedTime;
-		} else
-			return 0;
-	}
-
-	// int hoursBetweenBedtimeAndMidnight() {
-	// if((startTime <= bedTime && endTime >= 24)&&(startTime <= bedTime && endTime
-	// <= 24)) {
-	// return 24 - bedTime;
-	// } else if (startTime > bedTime && endTime < 24) {
-	// return endTime - startTime;
-	// } else if(endTime < 24 && startTime < bedTime) {
-	// return endTime - bedTime;
-	// } else if(startTime > bedTime && endTime > 24) {
-	// return 24 - startTime;
-	// }
-	// return 0;
-	// }
-
-	int hoursAfterMidnight() {
-		if (startTime >= 24 && endTime > 24) {
-			return endTime - startTime;
-		} else if (endTime > 24) {
-			return endTime - 24;
-		} else {
-			return 0;
-		}
-
+	boolean isValidUserEntry() {
+		final int[] invalids = IntStream.rangeClosed(5, 16).toArray(); 
+		
+		boolean startBeforeEnd = startTime < endTime;
+		boolean startDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == startTime);
+		boolean endDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == endTime);
+		boolean bedTimeDuringValidHours = IntStream.of(invalids).noneMatch(x -> x == bedTime);
+		
+		return startBeforeEnd && startDuringValidHours && endDuringValidHours && bedTimeDuringValidHours;
 	}
 
 	public int calculatePay() {
-		return hoursBeforeBedtime() * BEFORE_BEDTIME_RATE
-				+ hoursBetweenBedtimeAndMidnight() * BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
-				+ hoursAfterMidnight() * AFTER_MIDNIGHT_RATE;
+		int result = 0;
+		if(!isValidWorkHours()) {
+			return 0;
+		}
+		for(int i = startTime; i < endTime; i++) {
+			if(i < bedTime && i < 24) {
+				 result += BEFORE_BEDTIME_RATE;
+			} else if(i >= bedTime && i < 24) {
+				 result += BETWEEN_BEDTIME_AND_MIDNIGHT_RATE;
+			} else {
+				 result += AFTER_MIDNIGHT_RATE;
+			}
+		}
+		return result;
 	}
 
 	public static void main(String[] args) {
@@ -110,7 +80,7 @@ public class BabySitter {
 
 			BabySitter pay = new BabySitter(start, end, bedtime);
 
-			if (pay.isValidWorkHours(start, end) == true && pay.invalidUserEntry(start, end, bedtime) == false) {
+			if (pay.isValidWorkHours() && pay.isValidUserEntry()) {
 				System.out.println("Your payment for the night is: " + "$" + pay.calculatePay());
 			} else {
 				System.out.println(
