@@ -67,21 +67,21 @@ public class BabySitterTest {
 	@Test
 	public void should4PmBeNotaValidStartTime() {
 		BabySitter sitter = new BabySitter(16, 29, 20);
-		boolean notValid = sitter.isValidWorkHours(16, 18);
+		boolean notValid = sitter.isValidWorkHours();
 		Assert.assertEquals("Cannot start at 4 PM" , false, notValid);
 	}
 	
 	@Test
 	public void should6PmBeAValidStartTime() {
 		BabySitter sitter = new BabySitter(17, 28, 20);
-		boolean valid = sitter.isValidWorkHours(17, 28);
+		boolean valid = sitter.isValidWorkHours();
 		Assert.assertEquals("Ok to work between 5Pm and 4Am" , true, valid);
 	}
 	
 	@Test
 	public void hoursBetween4PmAnd5AmShouldBeInvalid() {
 		BabySitter sitter = new BabySitter(16, 29, 20);
-		boolean notValid = sitter.isValidWorkHours(16, 29);
+		boolean notValid = sitter.isValidWorkHours();
 		Assert.assertEquals("Hours outside of business hours are not valid", false, notValid);		
 	}
 	

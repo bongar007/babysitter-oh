@@ -1,6 +1,7 @@
 package babysitter;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class BabySitter {
 
@@ -18,22 +19,19 @@ public class BabySitter {
 		this.bedTime = convertAm(bedTime);
 	}
 
-	boolean isValidWorkHours(int startTime, int endTime) {
+	boolean isValidWorkHours() {
 		return (startTime >= 17 && startTime < 28) && (endTime <= 28 && endTime > 17);
 	}
 
-	boolean invalidUserEntry(int startTime, int endTime, int bedTime) {
-		boolean invalidTracker = false;
-		int[] invalids = new int[] { 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-		try (Scanner sc = new Scanner(System.in)) {
-			for (int i = 0; i < invalids.length; i++) {
-				if (invalids[i] == sc.nextInt()) {
-					invalidTracker = true;
-				}
-			}
-		}
-		return invalidTracker;
-
+	boolean isValidUserEntry() {
+		final int[] invalids = IntStream.rangeClosed(5, 16).toArray();
+		
+		boolean startBeforeEnd = startTime < endTime;
+		boolean startDuringValidHour = IntStream.of(invalids).noneMatch(x -> x == startTime);
+		boolean endDuringValidHour = IntStream.of(invalids).noneMatch(x -> x == endTime);
+		boolean bedTimeDuringValidHour = IntStream.of(invalids).noneMatch(x -> x == bedTime);
+		
+		return startBeforeEnd && startDuringValidHour && endDuringValidHour && bedTimeDuringValidHour;
 	}
 
 	int convertAm(int am) {
@@ -43,7 +41,7 @@ public class BabySitter {
 	int calculatePay() {
 		int result = 0;
 		
-		if (!isValidWorkHours(startTime, endTime)) {
+		if (!isValidWorkHours()) {
 			return 0;
 		}
 		
@@ -85,7 +83,7 @@ public class BabySitter {
 
 			BabySitter pay = new BabySitter(start, end, bedtime);
 
-			if ((pay.isValidWorkHours(start, end) == true) && pay.invalidUserEntry(start, end, bedtime)) {
+			if ((pay.isValidWorkHours()) && pay.isValidUserEntry()) {
 				System.out.println("Your payment for the night is: " + "$" + pay.calculatePay());
 			} else {
 				System.out.println(
